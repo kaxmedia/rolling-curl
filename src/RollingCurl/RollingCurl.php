@@ -311,6 +311,7 @@ class RollingCurl
             // see if we're done yet or not
         } while ($status === CURLM_CALL_MULTI_PERFORM || $active);
 
+        curl_close($transfer['handle']);
         curl_multi_close($master);
 
     }
