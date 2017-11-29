@@ -271,13 +271,14 @@ class RollingCurl
 
                 // remove the curl handle that just completed
                 curl_multi_remove_handle($master, $transfer['handle']);
-                curl_close($transfer['handle']);
                 
                 // if there is a callback, run it
                 if (is_callable($this->callback)) {
                     $callback = $this->callback;
                     $callback($request, $this);
                 }
+
+                curl_close($transfer['handle']);
 
                 // if something was requeued, this will get it running/update our loop check values
                 $status = curl_multi_exec($master, $active);
